@@ -14,6 +14,11 @@
             _id = ProductIdGenerator.GenerateNewProductId();
         }
 
+        public Product(string name)
+        {
+            _name = name;
+        }
+
         public int GetId() { return _id; }
 
         public float GetPrice() { return _price; }
