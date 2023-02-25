@@ -17,6 +17,7 @@ namespace Shops.Entities.Customer
         }
 
         public float GetBalance() { return _balance; }
+        public void SetBalance(float newBalance) { _balance = newBalance; }
 
         public string GetName() { return _name; }
 

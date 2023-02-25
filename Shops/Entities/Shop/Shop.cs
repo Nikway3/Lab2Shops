@@ -16,17 +16,18 @@ namespace Shops.Entities.Shop
         private readonly string _address;
         private float _shopsBalance;
 
+        public Shop()
+        {
+            _name = " ";
+            _address = " ";
+        }
+
         public Shop(string name, string address, float shopsBalance)
         {
             _name = name;
             _address = address;
             _shopsBalance = shopsBalance;
             _id = ShopIdGenerator.GenerateNewShopId();
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(_catalog, _name, _id, _address);
         }
 
         public float GetShopBalance() { return _shopsBalance; }
@@ -55,6 +56,26 @@ namespace Shops.Entities.Shop
         public bool IsInCatalog(Product.Product product)
         {
             return _catalog.Any(prod => prod.GetId() == product.GetId());
+        }
+
+        public bool CheckAmountIsInCatalog(Product.Product product)
+        {
+            Product.Product? prod = _catalog.Find((prod) => prod.GetName() == product.GetName());
+
+            if (prod != null)
+            {
+                if (prod.GetAmount() <= product.GetAmount()) return true;
+                else return false;
+            }
+
+            return false;
+        }
+
+        public float GetPriceFromCatalog(Product.Product product)
+        {
+            Product.Product? prod = _catalog.Find((prod) => prod.GetName() == product.GetName());
+            if (prod != null) return prod.GetPrice();
+            throw new ProductExistenceException("Product Doesn't Exist");
         }
 
         public Product.Product FindProduct(Product.Product product)

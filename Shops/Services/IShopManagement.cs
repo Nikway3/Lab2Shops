@@ -10,8 +10,7 @@ namespace Shops.Services
         Shop AddShop(string name, string address, float shopBalance);
         Customer CreateNewCustomer(string name, int balance);
         void CustomerMakePurchase(Customer customer, Shop shop, Product product, int amount);
-        void DeliverProducts(Shop shop, ReadOnlyCollection<Product> productList);
-        void AddProductToTheShop(Shop shop, Product product);
-        Product FindProductWithMinPrice();
+        void AddProductToTheShop(Shop shop, Product product, int amount);
+        Shop FindShop(List<Product> productsList);
     }
 }
